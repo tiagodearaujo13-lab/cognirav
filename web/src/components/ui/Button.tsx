@@ -1,6 +1,5 @@
 import React from 'react';
 import { clsx } from 'clsx';
-import { PureComponent } from 'react';
 
 // Forcing import tailwind-merge safely
 import { twMerge } from 'tailwind-merge';

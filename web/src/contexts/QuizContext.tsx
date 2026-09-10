@@ -1,5 +1,4 @@
 import React, {
-  createContext,
   useCallback,
   useEffect,
   useRef,
@@ -12,25 +11,7 @@ import type {
   QuizStatus,
   TestResultResponse,
 } from '../types/index';
-
-// ── Tipos do contexto ──────────────────────────────────────────────────────────
-interface QuizContextValue {
-  status: QuizStatus;
-  questions: QuestionPublic[];
-  currentIndex: number;
-  answers: Record<number, string>;
-  timeLeft: number;
-  result: TestResultResponse | null;
-  error: string | null;
-  startQuiz: () => Promise<void>;
-  selectAnswer: (questionId: number, optionId: string) => void;
-  nextQuestion: () => void;
-  prevQuestion: () => void;
-  submitQuiz: (email: string) => Promise<void>;
-  resetQuiz: () => void;
-}
-
-export const QuizContext = createContext<QuizContextValue | null>(null);
+import { QuizContext } from './quiz-context';
 
 // ── Provider ───────────────────────────────────────────────────────────────────
 export const QuizProvider: React.FC<{ children: React.ReactNode }> = ({
@@ -46,6 +27,47 @@ export const QuizProvider: React.FC<{ children: React.ReactNode }> = ({
 
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const pendingEmailRef = useRef<string | null>(null);
+  const answersRef = useRef(answers);
+  const questionsRef = useRef(questions);
+
+  // Mantém refs sincronizados com o estado mais recente (evita stale closures)
+  useEffect(() => {
+    answersRef.current = answers;
+    questionsRef.current = questions;
+  }, [answers, questions]);
+
+  // ── Auto-submit (tempo esgotado) ────────────────────────────────────────────
+  // Declarado antes do cronômetro e lendo o estado mais recente via refs,
+  // para evitar acesso a variável antes da declaração dentro do setInterval.
+  const autoSubmit = useCallback(
+    async (email: string) => {
+      setStatus('submitting');
+      const payload = {
+        email,
+        answers: Object.entries(answersRef.current).map(([qId, opt]) => ({
+          questionId: Number(qId),
+          selectedOption: opt,
+        })),
+      };
+
+      // Preencher respostas em falta com opção inválida (são contadas como erradas)
+      const missing = questionsRef.current
+        .filter((q) => !(q.id in answersRef.current))
+        .map((q) => ({ questionId: q.id, selectedOption: 'x' }));
+
+      payload.answers.push(...missing);
+
+      const res = await submitTest(payload);
+      if (res.success) {
+        setResult(res.data);
+        setStatus('completed');
+      } else {
+        setError(res.message);
+        setStatus(res.alreadyCompleted ? 'already_taken' : 'in_progress');
+      }
+    },
+    []
+  );
 
   // ── Cronômetro ──────────────────────────────────────────────────────────────
   useEffect(() => {
@@ -70,39 +92,7 @@ export const QuizProvider: React.FC<{ children: React.ReactNode }> = ({
     return () => {
       if (intervalRef.current) clearInterval(intervalRef.current);
     };
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [status]);
-
-  // ── Auto-submit (tempo esgotado) ────────────────────────────────────────────
-  const autoSubmit = useCallback(
-    async (email: string) => {
-      setStatus('submitting');
-      const payload = {
-        email,
-        answers: Object.entries(answers).map(([qId, opt]) => ({
-          questionId: Number(qId),
-          selectedOption: opt,
-        })),
-      };
-
-      // Preencher respostas em falta com opção inválida (são contadas como erradas)
-      const missing = questions
-        .filter((q) => !(q.id in answers))
-        .map((q) => ({ questionId: q.id, selectedOption: 'x' }));
-
-      payload.answers.push(...missing);
-
-      const res = await submitTest(payload);
-      if (res.success) {
-        setResult(res.data);
-        setStatus('completed');
-      } else {
-        setError(res.message);
-        setStatus(res.alreadyCompleted ? 'already_taken' : 'in_progress');
-      }
-    },
-    [answers, questions]
-  );
+  }, [status, autoSubmit]);
 
   // ── Ações Públicas ──────────────────────────────────────────────────────────
 
