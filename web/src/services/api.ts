@@ -4,7 +4,7 @@ const API_BASE = import.meta.env.VITE_API_URL || '/api';
 
 // ── Obter questões ─────────────────────────────────────────────────────────────
 export async function fetchQuestions(): Promise<QuestionPublic[]> {
-  const res = await fetch(`${API_BASE}/api/questions`);
+  const res = await fetch(`${API_BASE}/questions`);
   if (!res.ok) {
     throw new Error(`Erro ao carregar questões: ${res.status}`);
   }
@@ -17,7 +17,7 @@ export type SubmitResult =
   | { success: false; alreadyCompleted: boolean; message: string };
 
 export async function submitTest(payload: SubmitPayload): Promise<SubmitResult> {
-  const res = await fetch(`${API_BASE}/api/submit`, {
+  const res = await fetch(`${API_BASE}/submit`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(payload),

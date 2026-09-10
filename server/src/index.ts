@@ -72,9 +72,18 @@ app.use(globalLimiter);
 app.use(express.json({ limit: '10kb' }));
 
 // ── Rotas ─────────────────────────────────────────────────────────────────────
-app.get('/health', (_req, res) => {
-  res.status(200).json({ status: 'ok', timestamp: new Date().toISOString() });
-});
+// Health em duas vias: /health (uso local/standalone) e /api/health
+// (alcançável em produção, onde o rewrite da SPA consome prefixos fora de /api).
+const healthHandler = (_req: Request, res: Response) => {
+  res.status(200).json({ status: 'ok', uptime: process.uptime() });
+};
+
+app.get('/health', healthHandler);
+app.get('/api/health', healthHandler);
+
+// Aliases legados: o frontend consumia /api/api/* devido a um prefixo duplicado.
+app.get('/api/api/health', healthHandler);
+app.use('/api/api', apiLimiter, testRouter);
 
 app.use('/api', apiLimiter, testRouter);
 

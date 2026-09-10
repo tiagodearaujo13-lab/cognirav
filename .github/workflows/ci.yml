@@ -1,0 +1,36 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  verify:
+    name: Type-check, lint & build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+
+      - name: Install dependencies (clean)
+        run: npm ci
+
+      - name: Type-check (server + web)
+        run: |
+          npm run type-check -w server
+          npm run type-check -w web
+
+      - name: Lint (web)
+        run: npm run lint -w web
+
+      - name: Build (server + web)
+        run: npm run build
