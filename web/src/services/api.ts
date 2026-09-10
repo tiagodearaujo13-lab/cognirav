@@ -1,6 +1,6 @@
 import type { QuestionPublic, TestResultResponse, SubmitPayload } from '../types/index';
 
-const API_BASE = import.meta.env.VITE_API_URL ?? 'http://localhost:3001';
+const API_BASE = import.meta.env.VITE_API_URL || '/api';
 
 // ── Obter questões ─────────────────────────────────────────────────────────────
 export async function fetchQuestions(): Promise<QuestionPublic[]> {
