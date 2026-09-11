@@ -2,14 +2,17 @@ import React from 'react';
 import { Navbar } from '../components/Navbar';
 import { HeroVisual } from '../components/HeroVisual';
 import { HeroFooter } from '../components/HeroFooter';
+import { SectionHistory } from '../components/landing/SectionHistory';
+import { SectionApplications } from '../components/landing/SectionApplications';
+import { SectionFeatures } from '../components/landing/SectionFeatures';
+import { SectionTestimonials } from '../components/landing/SectionTestimonials';
+import { SectionFAQ } from '../components/landing/SectionFAQ';
+import { Footer } from '../components/Footer';
 import { useQuiz } from '../hooks/useQuiz';
 
 export const LandingPage: React.FC = () => {
   const { startQuiz, status } = useQuiz();
-
-  const handleStart = () => {
-    void startQuiz();
-  };
+  const handleStart = () => { void startQuiz(); };
 
   return (
     <main id="top" className="min-h-screen overflow-hidden bg-dark-bg">
@@ -20,12 +23,12 @@ export const LandingPage: React.FC = () => {
         <HeroVisual />
       </section>
       <HeroFooter onStart={handleStart} isLoading={status === 'submitting'} />
-      <section id="sobre" className="mx-auto max-w-7xl border-t border-dark-border/60 px-6 py-6 text-[10px] uppercase tracking-[.2em] text-dark-subtext">
-        <div className="flex flex-col justify-between gap-2 sm:flex-row">
-          <span>© {new Date().getFullYear()} Cognirav</span>
-          <span>Fluid intelligence / calibrated assessment</span>
-        </div>
-      </section>
+      <SectionHistory />
+      <SectionApplications />
+      <SectionFeatures />
+      <SectionTestimonials />
+      <SectionFAQ />
+      <Footer />
     </main>
   );
 };
