@@ -10,7 +10,7 @@ interface HeroFooterProps {
 }
 
 export const HeroFooter: React.FC<HeroFooterProps> = ({ onStart, isLoading = false }) => (
-  <section id="metodologia" className="mx-auto grid w-full max-w-7xl grid-cols-1 items-center gap-8 px-6 pb-20 pt-8 lg:grid-cols-12 lg:pt-12">
+  <section className="mx-auto grid w-full max-w-7xl grid-cols-1 items-center gap-8 px-6 pb-20 pt-8 lg:grid-cols-12 lg:pt-12">
     <div className="grid grid-cols-2 gap-3 lg:col-span-5" aria-label="Características da avaliação">
       {pills.map((pill) => (
         <span

@@ -2,8 +2,8 @@ import React from 'react';
 
 const navItems = [
   { label: 'AVALIAÇÃO', href: '#avaliacao' },
-  { label: 'METODOLOGIA', href: '#metodologia' },
-  { label: 'SOBRE', href: '#sobre' },
+  { label: 'METODOLOGIA', href: '#recursos' },
+  { label: 'SOBRE', href: '#historia' },
 ];
 
 const FacetedMark: React.FC = () => (

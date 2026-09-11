@@ -7,7 +7,7 @@ describe('Navbar', () => {
     render(<Navbar />);
 
     expect(screen.getByRole('link', { name: 'AVALIAÇÃO' })).toHaveAttribute('href', '#avaliacao');
-    expect(screen.getByRole('link', { name: 'METODOLOGIA' })).toHaveAttribute('href', '#metodologia');
-    expect(screen.getByRole('link', { name: 'SOBRE' })).toHaveAttribute('href', '#sobre');
+    expect(screen.getByRole('link', { name: 'METODOLOGIA' })).toHaveAttribute('href', '#recursos');
+    expect(screen.getByRole('link', { name: 'SOBRE' })).toHaveAttribute('href', '#historia');
   });
 });
