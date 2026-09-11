@@ -2,22 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
-/* ── Tokens base ──────────────────────────────────────────── */
 :root {
-  --color-bg:          #080a14;
-  --color-surface:     #0e1120;
-  --color-surface-2:   #161929;
-  --color-border:      rgba(99, 102, 241, 0.18);
-  --color-accent:      #4f46e5;
-  --color-accent-soft: rgba(79, 70, 229, 0.15);
-  --color-violet:      #7c3aed;
-  --color-emerald:     #10b981;
-  --color-text:        #f1f5f9;
-  --color-muted:       #94a3b8;
-  --color-faint:       #475569;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  color: #ffffff;
+  background: #111214;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
 }
 
-/* ── Reset & base ─────────────────────────────────────────── */
 *, *::before, *::after {
   box-sizing: border-box;
 }
@@ -28,44 +20,42 @@ html {
 
 body {
   margin: 0;
-  font-family: 'Inter', system-ui, sans-serif;
-  background: var(--color-bg);
-  color: var(--color-text);
+  min-width: 320px;
+  overflow-x: hidden;
+  background-color: #111214;
+  color: #ffffff;
+  font-family: 'Plus Jakarta Sans', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   line-height: 1.6;
 }
 
-/* ── Seleção de texto ─────────────────────────────────────── */
 ::selection {
-  background: rgba(79, 70, 229, 0.35);
-  color: #f1f5f9;
+  background: rgba(0, 163, 255, .3);
+  color: #fff;
 }
 
-/* ── Scrollbar personalizada ──────────────────────────────── */
-::-webkit-scrollbar {
-  width: 6px;
-}
-::-webkit-scrollbar-track {
-  background: var(--color-surface);
-}
-::-webkit-scrollbar-thumb {
-  background: var(--color-accent);
-  border-radius: 3px;
+.blueprint-grid {
+  background-image: linear-gradient(rgba(0, 163, 255, .08) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 163, 255, .08) 1px, transparent 1px);
+  background-size: 42px 42px;
+  mask-image: linear-gradient(to bottom, black, transparent 90%);
 }
 
-/* ── Focus global acessível ───────────────────────────────── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: #16181A; }
+::-webkit-scrollbar-thumb { background: #2E3236; border-radius: 3px; }
+
 :focus-visible {
-  outline: 2px solid var(--color-accent);
+  outline: 2px solid #00A3FF;
   outline-offset: 3px;
   border-radius: 4px;
 }
 
-/* ── Utilitários de animação respeitam prefers-reduced-motion */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
-    animation-duration: 0.01ms !important;
+    animation-duration: .01ms !important;
     animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
+    transition-duration: .01ms !important;
+    scroll-behavior: auto !important;
   }
 }

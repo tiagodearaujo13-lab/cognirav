@@ -24,15 +24,15 @@ export const Button: React.FC<ButtonProps> = ({
         clsx(
           // Estilos base comuns e focáveis (WCAG)
           "inline-flex items-center justify-center rounded-lg px-5 py-2.5 text-sm font-semibold transition-all duration-200 select-none",
-          "focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-brand-950 focus-visible:ring-accent-indigo focus-visible:outline-none",
+          "focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-dark-bg focus-visible:ring-blueprint-cyan focus-visible:outline-none",
           "disabled:opacity-40 disabled:cursor-not-allowed",
           {
             // Variante primária (Índigo/Violeta elétrico)
-            "bg-accent-indigo text-white hover:bg-accent-indigo-light active:scale-[0.98]": variant === 'primary',
+            "bg-white text-black hover:bg-neutral-200 active:scale-[0.98]": variant === 'primary',
             // Variante secundária (Fundo escuro suave)
-            "bg-brand-800 text-slate-200 hover:bg-brand-700 hover:text-white border border-brand-700": variant === 'secondary',
+            "bg-dark-surface text-neutral-200 hover:bg-dark-card hover:text-white border border-dark-border": variant === 'secondary',
             // Variante fantasma
-            "bg-transparent text-slate-300 hover:bg-brand-900 hover:text-white": variant === 'ghost',
+            "bg-transparent text-neutral-300 hover:bg-dark-surface hover:text-white": variant === 'ghost',
             // Variante perigo / alerta
             "bg-red-950 text-red-200 border border-red-800 hover:bg-red-900": variant === 'danger',
           }

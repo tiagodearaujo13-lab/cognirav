@@ -9,6 +9,7 @@
   "scripts": {
     "build": "npm run build -w server && npm run build -w web",
     "dev": "concurrently \"npm run dev -w server\" \"npm run dev -w web\"",
+    "test": "npm run test -w web",
     "lint": "npm run lint -w web",
     "type-check": "npm run type-check -w server && npm run type-check -w web"
   },

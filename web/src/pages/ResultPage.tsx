@@ -17,10 +17,10 @@ import type { QuestionCategory } from '../types/index';
 
 // Mapa de cores por categoria para os breakdowns
 const CAT_COLORS: Record<QuestionCategory, string> = {
-  numeric:    'from-blue-600 to-blue-400',
-  logic:      'from-violet-600 to-violet-400',
-  spatial:    'from-emerald-600 to-emerald-400',
-  structural: 'from-amber-600 to-amber-400',
+  numeric:    'from-blueprint-cyan to-sky-400',
+  logic:      'from-blueprint-cyan to-sky-400',
+  spatial:    'from-blueprint-cyan to-sky-400',
+  structural: 'from-blueprint-cyan to-sky-400',
 };
 
 export const ResultPage: React.FC = () => {
@@ -39,14 +39,14 @@ export const ResultPage: React.FC = () => {
           angle: 60,
           spread: 55,
           origin: { x: 0 },
-          colors: ['#4f46e5', '#7c3aed', '#10b981', '#f1f5f9'],
+          colors: ['#00A3FF', '#38bdf8', '#10b981', '#f1f5f9'],
         });
         void confetti({
           particleCount: 3,
           angle: 120,
           spread: 55,
           origin: { x: 1 },
-          colors: ['#4f46e5', '#7c3aed', '#10b981', '#f1f5f9'],
+          colors: ['#00A3FF', '#38bdf8', '#10b981', '#f1f5f9'],
         });
         if (Date.now() < end) requestAnimationFrame(frame);
       };
@@ -89,14 +89,14 @@ export const ResultPage: React.FC = () => {
       </h1>
 
       {/* ── Score principal ── */}
-      <Card className="w-full mb-6 text-center p-8 border-accent-indigo/30 animate-fade-in">
+      <Card className="w-full mb-6 text-center p-8 border-blueprint-cyan/30 animate-fade-in">
         {/* Círculo SVG */}
         <div className="flex justify-center mb-6">
           <svg width="140" height="140" viewBox="0 0 140 140" aria-label={`QI estimado: ${result.estimatedIQ}`}>
             {/* Track */}
             <circle
               cx="70" cy="70" r={iqRadius}
-              stroke="rgba(79,70,229,0.15)"
+              stroke="rgba(0,163,255,0.15)"
               strokeWidth="10"
               fill="none"
             />
@@ -113,8 +113,8 @@ export const ResultPage: React.FC = () => {
             />
             <defs>
               <linearGradient id="iqGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="0%" stopColor="#4f46e5" />
-                <stop offset="100%" stopColor="#7c3aed" />
+                <stop offset="0%" stopColor="#00A3FF" />
+                <stop offset="100%" stopColor="#38bdf8" />
               </linearGradient>
             </defs>
             {/* Valor central */}
@@ -122,7 +122,7 @@ export const ResultPage: React.FC = () => {
               x="70" y="65"
               textAnchor="middle" dominantBaseline="middle"
               className="fill-slate-100"
-              style={{ fontFamily: 'Syne, sans-serif', fontSize: '28px', fontWeight: 800 }}
+              style={{ fontFamily: 'Anton, sans-serif', fontSize: '28px', fontWeight: 800 }}
             >
               {result.estimatedIQ}
             </text>
@@ -130,7 +130,7 @@ export const ResultPage: React.FC = () => {
               x="70" y="88"
               textAnchor="middle" dominantBaseline="middle"
               className="fill-slate-400"
-              style={{ fontSize: '10px', fontFamily: 'Inter, sans-serif' }}
+              style={{ fontSize: '10px', fontFamily: 'Plus Jakarta Sans, sans-serif' }}
             >
               QI Estimado
             </text>
@@ -144,13 +144,13 @@ export const ResultPage: React.FC = () => {
         </p>
 
         {/* Percentil */}
-        <div className="bg-brand-800 rounded-xl p-4 text-left">
+        <div className="bg-dark-surface rounded-xl p-4 text-left">
           <div className="flex items-center justify-between mb-2">
             <span className="flex items-center gap-1.5 text-xs font-semibold text-slate-400">
               <TrendingUp className="h-3.5 w-3.5" aria-hidden="true" />
               Percentil Populacional
             </span>
-            <span className="font-mono text-sm font-bold text-indigo-300">{result.percentile}%</span>
+            <span className="font-mono text-sm font-bold text-blueprint-cyan">{result.percentile}%</span>
           </div>
           <ProgressBar value={result.percentile} max={100} />
           <p className="text-[11px] text-slate-500 mt-2">
@@ -175,7 +175,7 @@ export const ResultPage: React.FC = () => {
                   <span className="text-xs text-slate-600 ml-1">({cat.percentage}%)</span>
                 </span>
               </div>
-              <div className="w-full h-2.5 rounded-full bg-brand-800 overflow-hidden">
+              <div className="w-full h-2.5 rounded-full bg-dark-surface overflow-hidden">
                 <div
                   className={`h-full rounded-full bg-gradient-to-r ${CAT_COLORS[cat.category as QuestionCategory]} transition-all duration-700`}
                   style={{ width: `${cat.percentage}%` }}

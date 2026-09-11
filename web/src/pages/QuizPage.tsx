@@ -36,10 +36,10 @@ const EmailModal: React.FC<EmailModalProps> = ({ onSubmit, onCancel, isLoading, 
       aria-modal="true"
       aria-labelledby="modal-title"
     >
-      <div className="bg-brand-900 border border-accent-indigo/40 rounded-2xl shadow-2xl shadow-accent-indigo/10 w-full max-w-md p-8 animate-scale-in">
+      <div className="bg-dark-card border border-dark-border rounded-2xl shadow-2xl shadow-blueprint-cyan/10 w-full max-w-md p-8 animate-scale-in">
         {/* Header */}
         <div className="text-center mb-6">
-          <div className="inline-flex h-14 w-14 items-center justify-center rounded-full bg-accent-indigo/15 mb-4">
+          <div className="inline-flex h-14 w-14 items-center justify-center rounded-full bg-blueprint-cyan/10 mb-4">
             <Send className="h-6 w-6 text-indigo-400" aria-hidden="true" />
           </div>
           <h2 id="modal-title" className="font-display text-2xl font-bold text-slate-100">
@@ -78,10 +78,10 @@ const EmailModal: React.FC<EmailModalProps> = ({ onSubmit, onCancel, isLoading, 
                 onChange={(e) => setEmail(e.target.value)}
                 onBlur={() => setTouched(true)}
                 className={`
-                  w-full rounded-lg border bg-brand-950 px-4 py-2.5 text-sm text-slate-100 placeholder-slate-600
+                  w-full rounded-lg border bg-dark-bg px-4 py-2.5 text-sm text-slate-100 placeholder-slate-600
                   transition-colors duration-200
-                  focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-indigo focus-visible:ring-offset-1 focus-visible:ring-offset-brand-900
-                  ${touched && !isValid ? 'border-red-700' : 'border-brand-700 hover:border-brand-600'}
+                  focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blueprint-cyan focus-visible:ring-offset-1 focus-visible:ring-offset-dark-bg
+                  ${touched && !isValid ? 'border-red-700' : 'border-dark-border hover:border-dark-borderHover'}
                 `}
               />
               {touched && !isValid && (
@@ -215,7 +215,7 @@ export const QuizPage: React.FC = () => {
               className={`font-mono text-sm font-semibold tabular-nums px-3 py-1 rounded-full border transition-colors duration-500 ${
                 isTimeCritical
                   ? 'border-red-700 bg-red-950/50 text-red-400 animate-pulse'
-                  : 'border-brand-700 bg-brand-900 text-slate-300'
+                  : 'border-dark-border bg-dark-surface text-neutral-300'
               }`}
               aria-label={`Tempo restante: ${formatTime(timeLeft)}`}
             >
@@ -235,7 +235,7 @@ export const QuizPage: React.FC = () => {
 
         {/* ── Enunciado ───────────────────────────────────────── */}
         <div className="animate-slide-up flex-1 space-y-6">
-          <div className="rounded-2xl border border-brand-700/60 bg-brand-900/80 p-6">
+          <div className="rounded-2xl border border-dark-border bg-dark-card p-6">
             <p className="text-xs font-mono text-slate-500 uppercase tracking-widest mb-3">
               Questão {String(currentIndex + 1).padStart(2, '0')} — {CATEGORY_LABELS[currentModule]}
             </p>
@@ -257,11 +257,11 @@ export const QuizPage: React.FC = () => {
                   className={`
                     group w-full flex items-center gap-4 rounded-xl border px-5 py-4 text-left text-sm
                     transition-all duration-200 cursor-pointer
-                    focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-indigo focus-visible:ring-offset-2 focus-visible:ring-offset-brand-950
+                    focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blueprint-cyan focus-visible:ring-offset-2 focus-visible:ring-offset-dark-bg
                     ${
                       isSelected
-                        ? 'border-accent-indigo bg-accent-indigo/15 text-slate-100 shadow-md shadow-accent-indigo/10'
-                        : 'border-brand-700/60 bg-brand-900 text-slate-300 hover:border-accent-indigo/50 hover:bg-brand-800'
+                        ? 'border-blueprint-cyan bg-blueprint-cyan/10 text-slate-100 shadow-md shadow-blueprint-cyan/10'
+                        : 'border-dark-border bg-dark-surface text-neutral-300 hover:border-blueprint-cyan/70 hover:bg-dark-card'
                     }
                   `}
                 >
@@ -270,7 +270,7 @@ export const QuizPage: React.FC = () => {
                     className={`
                       flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-md text-xs font-bold font-mono
                       transition-colors duration-200
-                      ${isSelected ? 'bg-accent-indigo text-white' : 'bg-brand-800 text-slate-400 group-hover:bg-brand-700'}
+                      ${isSelected ? 'bg-blueprint-cyan text-black' : 'bg-dark-card text-neutral-400 group-hover:bg-dark-border'}
                     `}
                     aria-hidden="true"
                   >

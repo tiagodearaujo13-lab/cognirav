@@ -9,10 +9,10 @@ interface BadgeProps {
 }
 
 const CATEGORY_COLORS: Record<QuestionCategory, string> = {
-  numeric:    'bg-blue-950 text-blue-300 border-blue-800',
-  logic:      'bg-violet-950 text-violet-300 border-violet-800',
-  spatial:    'bg-emerald-950 text-emerald-300 border-emerald-800',
-  structural: 'bg-amber-950 text-amber-300 border-amber-800',
+  numeric:    'bg-blueprint-cyan/10 text-blueprint-cyan border-blueprint-cyan/40',
+  logic:      'bg-blueprint-cyan/10 text-blueprint-cyan border-blueprint-cyan/40',
+  spatial:    'bg-blueprint-cyan/10 text-blueprint-cyan border-blueprint-cyan/40',
+  structural: 'bg-blueprint-cyan/10 text-blueprint-cyan border-blueprint-cyan/40',
 };
 
 export const Badge: React.FC<BadgeProps> = ({ category, className }) => {

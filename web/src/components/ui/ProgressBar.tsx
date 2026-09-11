@@ -19,7 +19,7 @@ export const ProgressBar: React.FC<ProgressBarProps> = ({
 
   return (
     <div
-      className={twMerge("w-full bg-brand-800 rounded-full h-2.5 overflow-hidden", className)}
+      className={twMerge("w-full bg-dark-surface rounded-full h-1.5 overflow-hidden", className)}
       role="progressbar"
       aria-valuenow={percentage}
       aria-valuemin={0}
@@ -27,7 +27,7 @@ export const ProgressBar: React.FC<ProgressBarProps> = ({
     >
       <div
         className={clsx(
-          "bg-gradient-to-r from-accent-indigo to-accent-violet h-full rounded-full",
+          "bg-blueprint-cyan h-full rounded-full shadow-[0_0_12px_rgba(0,163,255,.45)]",
           {
             "transition-all duration-300 ease-out": animate,
           }
